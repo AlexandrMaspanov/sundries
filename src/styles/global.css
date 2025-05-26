@@ -1,0 +1,23 @@
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+    color: #1f2937;
+    background-color: #f9fafb;
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+}
