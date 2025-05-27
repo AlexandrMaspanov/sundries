@@ -1,10 +1,8 @@
 import { useCallback, useState } from 'react';
 import { debounce } from 'lodash';
-import { API_KEYS } from '../../config';
 import CustomSelect from '../customselect/CustomSelect';
 
 const CitySelect = ({ onCityChange }) => {
-    const key = API_KEYS.weather;
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -12,20 +10,21 @@ const CitySelect = ({ onCityChange }) => {
         if (!inputValue || inputValue.length < 3) return setOptions([]);
 
         setLoading(true);
+
         try {
-            const res = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${inputValue}&limit=5&appid=${key}`);
+            const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(inputValue)}&sort=-population`);
             const data = await res.json();
 
             setOptions(
                 data.map(city => ({
                     value: `${city.lat},${city.lon}`,
-                    label: `${city.name}${city.state ? ', ' + city.state : ''}, ${city.country}`,
-                    full: city.name,
+                    label: `${city.display_name}`,
+                    fullName: city.display_name,
                 }))
             );
         } catch (e) {
+            console.error('Ошибка загрузки городов: ', e);
             setOptions([]);
-            console.error(e);
         }
         setLoading(false);
     };
@@ -39,7 +38,8 @@ const CitySelect = ({ onCityChange }) => {
 
     const handleChange = (selectedOption) => {
         if (selectedOption) {
-            onCityChange(selectedOption.full);
+            const [lat, lon] = selectedOption.value.split(',');
+            onCityChange({lat, lon, name: selectedOption.fullName});
         }
     };
 
@@ -47,10 +47,10 @@ const CitySelect = ({ onCityChange }) => {
         <CustomSelect
             options={options}
             onChange={handleChange}
+            onInputChange={handleInputChange}
             placeholder='Введите город...'
             isLoading={loading}
             noOptionsMessage={() => 'Нет результатов'}
-            onInputChange={handleInputChange}
         />
     );
 }

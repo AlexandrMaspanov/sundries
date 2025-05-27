@@ -1,18 +1,12 @@
 import Select from 'react-select';
 import styles from './CustomSelect.module.css';
 
-const CustomSelect = ({ options, onChange, value, placeholder, isLoading, noOptionsMessage, onInputChange }) => {
+const CustomSelect = (props) => {
     return (
         <Select
-            options={options}
-            onChange={onChange}
-            value={value}
-            placeholder={placeholder}
-            isLoading={isLoading}
-            noOptionsMessage={noOptionsMessage}
-            onInputChange={onInputChange}
-            className={styles.select}
-            classNamePrefix="react-select"
+            {...props}
+            isClearable
+            classNamePrefix="custom"
         />
     );
 }
