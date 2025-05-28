@@ -58,6 +58,18 @@
     color: #333;
 }
 
+.source {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #777;
+    text-align: right;
+}
+
+.source a {
+    color: #555;
+    text-decoration: underline;
+}
+
 .error {
     color: #b00020;
     text-align: center;

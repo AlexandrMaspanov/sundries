@@ -5,13 +5,114 @@ import PageWrapper from '../PageWrapper';
 import Loader from '../../components/UI/loader/Loader';
 import CitySelect from '../../components/cityselect/CitySelect';
 
+const DEAFAULT_CITY = 'Минск';
+const DEAFAULT_COORDINATES = { lat: 53.9, lon: 27.5667 }; // координаты Минска
+
 const Weather = () => {
-    const [coordinates, setCoordinates] = useState({ lat: 53.9, lon: 27.5667 }); // координаты Минска
+    const [coordinates, setCoordinates] = useState(null);
+    const [selectedCity, setSelectedCity] = useState('');
     const [weather, setWeather] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isInitialised, setIsInitialized] = useState(false);
+
+    const fetchCityName = async (lat, lon) => {
+        try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+            const data = await res.json();
+            return data.address.city || data.address.town || data.address.village;
+        } catch (error) {
+            console.error('Ошибка при определении города: ', error);
+            return;
+        }
+    }
+
+    const handleGeolocationClick = () => {
+        if (!navigator.geolocation) {
+            alert('Ваш браузер не поддерживает геолокацию');
+            return;
+        }
+
+        setLoading(true);
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude: lat, longitude: lon } = position.coords;
+            const geoCoords = { lat, lon };
+
+            const cityName = await fetchCityName(lat, lon);
+
+            if (cityName) {
+                setSelectedCity(cityName);
+                setCoordinates(geoCoords);
+
+                localStorage.setItem('savedCity', cityName);
+                localStorage.setItem('savedCoordinates', JSON.stringify(geoCoords));
+            }
+
+            setLoading(false);
+        },
+            (error) => {
+                console.error('Ошибка получения геолокации: ', error);
+                alert('Не удалось получить геопозицию');
+                setLoading(false);
+            }
+        );
+    }
 
     useEffect(() => {
+        const savedCity = localStorage.getItem('savedCity');
+        const savedCoordinates = localStorage.getItem('savedCoordinates');
+
+        if (savedCity && savedCoordinates) {
+            try {
+                const parsedCoords = JSON.parse(savedCoordinates);
+
+                setSelectedCity(savedCity);
+                setCoordinates(parsedCoords);
+            } catch (error) {
+                console.error('Ошибка парсинга координат: ', error);
+            }
+            setIsInitialized(true);
+            return;
+        }
+
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const { latitude: lat, longitude: lon } = position.coords;
+                const coords = { lat, lon };
+
+                const cityName = await fetchCityName(lat, lon);
+
+                if (cityName) {
+                    setSelectedCity(cityName);
+                    setCoordinates(coords);
+
+                    localStorage.setItem('savedCity', cityName);
+                    localStorage.setItem('savedCoordinates', JSON.stringify(coords));
+                } else {
+                    setSelectedCity(DEAFAULT_CITY);
+                    setCoordinates(DEAFAULT_COORDINATES);
+
+                    localStorage.setItem('savedCity', DEAFAULT_CITY);
+                    localStorage.setItem('savedCoordinates', DEAFAULT_COORDINATES);
+                }
+                setIsInitialized(true);
+            }, (error) => {
+                console.warn(`Геолокация отклонена, используем ${DEAFAULT_CITY}`);
+
+                setSelectedCity(DEAFAULT_CITY);
+                setCoordinates(DEAFAULT_COORDINATES);
+                setIsInitialized(true);
+            });
+        } else {
+            setSelectedCity(DEAFAULT_CITY);
+            setCoordinates(DEAFAULT_COORDINATES);
+            setIsInitialized(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!coordinates || !isInitialised) return;
         const WEATHER_API_KEY = API_KEYS.weather;
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${WEATHER_API_KEY}&units=metric&lang=ru`;
 
@@ -37,7 +138,7 @@ const Weather = () => {
         };
 
         fetchWeather();
-    }, [coordinates]);
+    }, [coordinates, isInitialised]);
 
     let formattedDate = 'нет данных';
     let gmtOffset = '';
@@ -62,7 +163,12 @@ const Weather = () => {
     return (
         <PageWrapper>
             <h1>Погода в городе</h1>
-            <CitySelect onCityChange={setCoordinates} />
+            <CitySelect
+                value={{ label: selectedCity, value: '' }}
+                onChange={setSelectedCity}
+                onCityChange={setCoordinates}
+            />
+            <button onClick={handleGeolocationClick}>Обновить по моей геопозиции</button>
             {loading ? (
                 <Loader />
             ) : error ? (
@@ -89,6 +195,9 @@ const Weather = () => {
                         Ветер: {weather.wind.speed} м/с<br />
                         Давление: {weather.main.pressure} гПа<br />
                         Обновлено: {formattedDate}{gmtOffset && ` (${gmtOffset})`}
+                    </div>
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://openweathermap.org/' target='_blank' rel='noopener noreferrer'>OpenWeatherMap</a>
                     </div>
                 </div>
             ) : (

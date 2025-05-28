@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { debounce } from 'lodash';
 import CustomSelect from '../customselect/CustomSelect';
 
-const CitySelect = ({ onCityChange }) => {
+const CitySelect = ({ value, onChange, onCityChange }) => {
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -18,8 +18,7 @@ const CitySelect = ({ onCityChange }) => {
             setOptions(
                 data.map(city => ({
                     value: `${city.lat},${city.lon}`,
-                    label: `${city.display_name}`,
-                    fullName: city.display_name,
+                    label: city.display_name,
                 }))
             );
         } catch (e) {
@@ -39,12 +38,17 @@ const CitySelect = ({ onCityChange }) => {
     const handleChange = (selectedOption) => {
         if (selectedOption) {
             const [lat, lon] = selectedOption.value.split(',');
-            onCityChange({lat, lon, name: selectedOption.fullName});
+            onCityChange({lat, lon });
+            onChange(selectedOption.label);
+
+            localStorage.setItem('savedCity', selectedOption.label);
+            localStorage.setItem('savedCoordinates', JSON.stringify({lat, lon}));
         }
     };
 
     return (
         <CustomSelect
+            value={value}
             options={options}
             onChange={handleChange}
             onInputChange={handleInputChange}
