@@ -1,15 +1,28 @@
 .header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    width: 100%;
     padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #dbe5ee;
+    background-color: #f9fbfc;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    z-index: 1001;
+}
+
+.headerContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #0077cc;
+.overlay {
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900;
 }

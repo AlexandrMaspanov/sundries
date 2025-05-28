@@ -1,12 +1,14 @@
-import NavItem from './NavItem';
+import NavItem from './navitem/NavItem';
 import styles from './Navbar.module.css';
 
-const Navbar = () => {
+const Navbar = ({ isOpen, onCloseMenu }) => {
     return (
-        <nav className={styles.navbar}>
-            <NavItem to='/'>Главная</NavItem>
-            <NavItem to='/weather'>Погода</NavItem>
-            <NavItem to='/exchange-rates'>Курсы валют</NavItem>
+        <nav className={`${styles.navbar} ${isOpen ? styles.navbarOpen : ''}`}>
+            <ul className={styles.navbarLinks}>
+                <NavItem to='/' onClick={onCloseMenu}>Главная</NavItem>
+                <NavItem to='/weather' onClick={onCloseMenu}>Погода</NavItem>
+                <NavItem to='/exchange-rates' onClick={onCloseMenu}>Курсы валют</NavItem>
+            </ul>
         </nav>
     );
 }

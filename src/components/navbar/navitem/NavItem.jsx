@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import styles from './Navbar.module.css';
+import styles from './NavItem.module.css';
 
-const NavItem = ({ to, children }) => {
+const NavItem = ({ to, children, onClick }) => {
     return (
         <NavLink
             to={to}
             end={to === '/'}
+            onClick={onClick}
             className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
         >
             {children}
