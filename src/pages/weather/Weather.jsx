@@ -10,8 +10,11 @@ const DEAFAULT_CITY = 'Минск';
 const DEAFAULT_COORDINATES = { lat: 53.9, lon: 27.5667 }; // координаты Минска
 
 const Weather = () => {
-    const [coordinates, setCoordinates] = useState(null);
-    const [selectedCity, setSelectedCity] = useState('');
+    const [coordinates, setCoordinates] = useState(() => {
+        const savedCoordinates = localStorage.getItem('savedCoordinates');
+        return savedCoordinates ? JSON.parse(savedCoordinates) : null;
+    });
+    const [selectedCity, setSelectedCity] = useState(localStorage.getItem('savedCity') || '');
     const [weather, setWeather] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -167,7 +170,7 @@ const Weather = () => {
         <PageWrapper>
             <h1>Погода в городе</h1>
             <CitySelect
-                value={{ label: selectedCity, value: '' }}
+                value={selectedCity ? { label: selectedCity, value: selectedCity } : null}
                 onChange={setSelectedCity}
                 onCityChange={setCoordinates}
             />

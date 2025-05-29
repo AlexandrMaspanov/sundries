@@ -43,6 +43,12 @@ const CitySelect = ({ value, onChange, onCityChange }) => {
 
             localStorage.setItem('savedCity', selectedOption.label);
             localStorage.setItem('savedCoordinates', JSON.stringify({lat, lon}));
+        } else {
+            onCityChange(null);
+            onChange('');
+
+            localStorage.removeItem('savedCity');
+            localStorage.removeItem('savedCoordinates');
         }
     };
 
