@@ -122,9 +122,10 @@ const Weather = () => {
         const WEATHER_API_KEY = API_KEYS.weather;
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${WEATHER_API_KEY}&units=metric&lang=ru`;
 
-        const fetchWeather = async () => {
+        const fetchWeather = async (url) => {
             setLoading(true);
             setError(null);
+
             try {
                 const res = await fetch(url);
                 const data = await res.json();
@@ -143,7 +144,7 @@ const Weather = () => {
             }
         };
 
-        fetchWeather();
+        fetchWeather(url);
     }, [coordinates, isInitialised]);
 
     let formattedDate = 'нет данных';
