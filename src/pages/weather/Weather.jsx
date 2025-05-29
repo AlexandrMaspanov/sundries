@@ -4,6 +4,7 @@ import { API_KEYS } from '../../config';
 import PageWrapper from '../PageWrapper';
 import Loader from '../../components/UI/loader/Loader';
 import CitySelect from '../../components/cityselect/CitySelect';
+import CustomButton from '../../components/custombutton/CustomButton';
 
 const DEAFAULT_CITY = 'Минск';
 const DEAFAULT_COORDINATES = { lat: 53.9, lon: 27.5667 }; // координаты Минска
@@ -17,8 +18,10 @@ const Weather = () => {
     const [isInitialised, setIsInitialized] = useState(false);
 
     const fetchCityName = async (lat, lon) => {
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
+
         try {
-            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+            const res = await fetch(url);
             const data = await res.json();
             return data.address.city || data.address.town || data.address.village;
         } catch (error) {
@@ -168,7 +171,9 @@ const Weather = () => {
                 onChange={setSelectedCity}
                 onCityChange={setCoordinates}
             />
-            <button onClick={handleGeolocationClick}>Обновить по моей геопозиции</button>
+            <CustomButton onClick={handleGeolocationClick}>
+                Обновить по моей геопозиции
+            </CustomButton>
             {loading ? (
                 <Loader />
             ) : error ? (
