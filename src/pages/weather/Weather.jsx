@@ -77,7 +77,6 @@ const Weather = () => {
 
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(async (position) => {
-                console.log(position.coords)
                 const { latitude: lat, longitude: lon } = position.coords;
 
                 const cityName = await fetchCityName(lat, lon);
@@ -131,16 +130,15 @@ const Weather = () => {
 
         navigator.geolocation.getCurrentPosition(async (position) => {
             const { latitude: lat, longitude: lon } = position.coords;
-            const geoCoords = { lat, lon };
 
             const cityName = await fetchCityName(lat, lon);
 
             if (cityName) {
                 setSelectedCity(cityName);
-                setCoordinates(geoCoords);
+                setCoordinates({ lat, lon });
 
                 localStorage.setItem('savedCity', cityName);
-                localStorage.setItem('savedCoordinates', JSON.stringify(geoCoords));
+                localStorage.setItem('savedCoordinates', JSON.stringify({ lat, lon }));
             }
 
             setLoading(false);

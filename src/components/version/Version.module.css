@@ -1,0 +1,10 @@
+.version {
+    position: fixed;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background: #eee;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
