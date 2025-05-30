@@ -1,9 +1,14 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
     max-width: 1000px;
     margin: 0 auto;
+}
+
+.wrapper section:first-of-type {
+    text-align: center;
+    background-color: #e3f2fd;
 }
 
 .horoscopeList {
