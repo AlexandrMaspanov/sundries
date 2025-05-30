@@ -18,38 +18,45 @@ const ExchangeRates = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const fetchRates = async () => {
+        const url = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            const res = await fetch(url);
+
+            if (!res.ok) {
+                throw new Error('Ошибка загрузки курсов валют: ', error);
+            }
+
+            const data = await res.json();
+            setRates(data);
+            setAllCurrencies(data.map(cur => cur.Cur_Abbreviation));
+        } catch (error) {
+            console.error('Ошибка загрузки курсов валют: ', error);
+            setError(error.message || 'Неизвестная ошибка');
+            setRates([]);
+            setAllCurrencies([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         localStorage.setItem('selectedCurrencies', JSON.stringify(selected));
     }, [selected]);
 
     useEffect(() => {
-        const url = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
 
-        const fetchRates = async (url) => {
-            setLoading(true);
-            setError(null);
+        fetchRates();
 
-            try {
-                const res = await fetch(url);
+        const intervalId = setInterval(() => {
+            fetchRates();
+        }, 10 * 60 * 1000);
 
-                if (!res.ok) {
-                    throw new Error('Ошибка загрузки курсов валют: ', error);
-                }
-
-                const data = await res.json();
-                setRates(data);
-                setAllCurrencies(data.map(cur => cur.Cur_Abbreviation));
-            } catch (error) {
-                console.error('Ошибка загрузки курсов валют: ', error);
-                setError(error.message || 'Неизвестная ошибка');
-                setRates([]);
-                setAllCurrencies([]);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchRates(url);
+        return () => clearInterval(intervalId);
     }, []);
 
     const handleReset = () => {
