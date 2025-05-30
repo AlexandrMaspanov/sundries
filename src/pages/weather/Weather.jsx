@@ -35,12 +35,11 @@ const Weather = () => {
     }
 
     const fetchWeather = async () => {
-        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${WEATHER_API_KEY}&units=metric&lang=ru`;
-
         setLoading(true);
         setError(null);
 
         try {
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${WEATHER_API_KEY}&units=metric&lang=ru`;
             const res = await fetch(url);
             const data = await res.json();
             if (data.cod && data.cod !== 200) {

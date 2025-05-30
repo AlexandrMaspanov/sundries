@@ -1,4 +1,5 @@
 import InfoBlock from '../../components/infoblock/InfoBlock';
+import NameDays from '../../components/namedays/NameDays';
 import Today from '../../components/today/Today';
 import PageWrapper from '../PageWrapper';
 import styles from './Home.module.css';
@@ -33,6 +34,7 @@ const Home = () => {
                     title='Кого поздравляем'
                     icon='🗓'
                 >
+                    <NameDays />
                 </InfoBlock>
 
                 <InfoBlock

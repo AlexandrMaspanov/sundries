@@ -19,12 +19,11 @@ const ExchangeRates = () => {
     const [error, setError] = useState(null);
 
     const fetchRates = async () => {
-        const url = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
-
         setLoading(true);
         setError(null);
 
         try {
+            const url = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
             const res = await fetch(url);
 
             if (!res.ok) {
