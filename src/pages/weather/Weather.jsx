@@ -6,11 +6,11 @@ import Loader from '../../components/UI/loader/Loader';
 import CitySelect from '../../components/cityselect/CitySelect';
 import CustomButton from '../../components/custombutton/CustomButton';
 
-const WEATHER_API_KEY = API_KEYS.weather;
-const DEAFAULT_CITY = 'Минск';
-const DEAFAULT_COORDINATES = { lat: 53.9, lon: 27.5667 }; // координаты Минска
-
 const Weather = () => {
+    const WEATHER_API_KEY = API_KEYS.weather;
+    const DEAFAULT_CITY = 'Минск';
+    const DEAFAULT_COORDINATES = { lat: 53.9, lon: 27.5667 }; // координаты Минска
+
     const [coordinates, setCoordinates] = useState(() => {
         const savedCoordinates = localStorage.getItem('savedCoordinates');
         return savedCoordinates ? JSON.parse(savedCoordinates) : null;

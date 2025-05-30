@@ -6,9 +6,9 @@ import CurrencySelect from '../../components/currencyselect/CurrencySelect';
 import CurrencyCard from './CurrencyCard';
 import CustomButton from '../../components/custombutton/CustomButton';
 
-const DEFAULT_CURRENCIES = ['USD', 'EUR', 'RUB'];
-
 const ExchangeRates = () => {
+    const DEFAULT_CURRENCIES = ['USD', 'EUR', 'RUB'];
+
     const [rates, setRates] = useState([]);
     const [selected, setSelected] = useState(() => {
         const selectedCurrencies = localStorage.getItem('selectedCurrencies');
