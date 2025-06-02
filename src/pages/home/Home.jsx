@@ -8,6 +8,7 @@ import Today from '../../components/today/Today';
 import PageWrapper from '../PageWrapper';
 import styles from './Home.module.css';
 import Word from '../../components/word/Word';
+import BrainTeaser from '../../components/brainteaser/BrainTeaser';
 
 const Home = () => {
     const zodiacSigns = [
@@ -83,7 +84,7 @@ const Home = () => {
                     title='Разомни мозги'
                     icon='🧩'
                 >
-                    <p>Задача</p>
+                    <BrainTeaser />
                 </InfoBlock>
 
                 <InfoBlock
