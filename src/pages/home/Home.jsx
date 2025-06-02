@@ -1,6 +1,7 @@
 import Holidays from '../../components/holidays/Holidays';
 import InfoBlock from '../../components/infoblock/InfoBlock';
 import NameDays from '../../components/namedays/NameDays';
+import Quote from '../../components/quote/Quote';
 import Today from '../../components/today/Today';
 import PageWrapper from '../PageWrapper';
 import styles from './Home.module.css';
@@ -50,8 +51,7 @@ const Home = () => {
                     icon='💬'
                 >
                     <blockquote>
-                        <p>Цитата, мудрая мысль</p>
-                        <footer>- Автор цитаты</footer>
+                        <Quote />
                     </blockquote>
                 </InfoBlock>
 
