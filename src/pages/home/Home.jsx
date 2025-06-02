@@ -3,6 +3,7 @@ import InfoBlock from '../../components/infoblock/InfoBlock';
 import Joke from '../../components/joke/Joke';
 import NameDays from '../../components/namedays/NameDays';
 import Quote from '../../components/quote/Quote';
+import Tip from '../../components/moodtips/MoodTips';
 import Today from '../../components/today/Today';
 import PageWrapper from '../PageWrapper';
 import styles from './Home.module.css';
@@ -67,7 +68,7 @@ const Home = () => {
                     title='Как поднять настроение'
                     icon='🧘‍♂️'
                 >
-                    <p>Советы по настроению</p>
+                    <Tip />
                 </InfoBlock>
 
                 <InfoBlock
