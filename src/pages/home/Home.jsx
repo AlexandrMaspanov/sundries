@@ -7,6 +7,7 @@ import Tip from '../../components/moodtips/MoodTips';
 import Today from '../../components/today/Today';
 import PageWrapper from '../PageWrapper';
 import styles from './Home.module.css';
+import Word from '../../components/word/Word';
 
 const Home = () => {
     const zodiacSigns = [
@@ -49,7 +50,7 @@ const Home = () => {
                 </InfoBlock>
 
                 <InfoBlock
-                    title='Мысль на день'
+                    title='Цитата'
                     icon='💬'
                 >
                     <blockquote>
@@ -75,7 +76,7 @@ const Home = () => {
                     title='Интересное слово'
                     icon='📌'
                 >
-                    <p>Слово</p>
+                    <Word />
                 </InfoBlock>
 
                 <InfoBlock
