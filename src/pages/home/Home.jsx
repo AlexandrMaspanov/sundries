@@ -1,5 +1,6 @@
 import Holidays from '../../components/holidays/Holidays';
 import InfoBlock from '../../components/infoblock/InfoBlock';
+import Joke from '../../components/joke/Joke';
 import NameDays from '../../components/namedays/NameDays';
 import Quote from '../../components/quote/Quote';
 import Today from '../../components/today/Today';
@@ -59,7 +60,7 @@ const Home = () => {
                     title='Улыбнись!'
                     icon='😂'
                 >
-                    <p>Анекдот, шутка</p>
+                    <Joke />
                 </InfoBlock>
 
                 <InfoBlock
