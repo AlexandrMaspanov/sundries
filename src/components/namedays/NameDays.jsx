@@ -14,9 +14,9 @@ const NameDays = () => {
         try {
             const today = new Date();
             const day = today.getDate();
-            const month = today.getDate();
+            const month = today.getMonth();
 
-            const url = `https://nameday.abalin.net/api/v2/namedays?country=ru&month=${month}&day=${day}`;
+            const url = `https://nameday.abalin.net/api/v2/country=ru&month=${month}&day=${day}`;
             const res = await fetch(url);
 
             if (!res.ok) {

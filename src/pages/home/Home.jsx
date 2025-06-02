@@ -1,3 +1,4 @@
+import Holidays from '../../components/holidays/Holidays';
 import InfoBlock from '../../components/infoblock/InfoBlock';
 import NameDays from '../../components/namedays/NameDays';
 import Today from '../../components/today/Today';
@@ -41,7 +42,7 @@ const Home = () => {
                     title='Праздник на календаре'
                     icon='🎉'
                 >
-                    <p>Праздник, памятная дата</p>
+                    <Holidays />
                 </InfoBlock>
 
                 <InfoBlock
