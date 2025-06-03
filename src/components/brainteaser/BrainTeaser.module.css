@@ -26,11 +26,13 @@ ul {
     background-color: #d0d0d0;
 }
 
-.correct {
+.correct,
+.correct:hover {
     background-color: #c8e6c9;
 }
 
-.incorrect {
+.incorrect,
+.incorrect:hover {
     background-color: #ffcdd2;
 }
 
