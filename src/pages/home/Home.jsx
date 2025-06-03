@@ -9,6 +9,7 @@ import PageWrapper from '../PageWrapper';
 import styles from './Home.module.css';
 import Word from '../../components/word/Word';
 import BrainTeaser from '../../components/brainteaser/BrainTeaser';
+import Horoscope from '../../components/horoscope/Horoscope';
 import Space from '../../components/space/Space';
 
 const Home = () => {
@@ -92,14 +93,7 @@ const Home = () => {
                     title='Звёзды говорят'
                     icon='🔮'
                 >
-                    <ul className={styles.horoscopeList}>
-                        {zodiacSigns.map(sign => (
-                            <li key={sign.title} className={styles.horoscopeItem}>
-                                <strong>{sign.icon} {sign.title}</strong>
-                                <p>краткий гороскоп</p>
-                            </li>
-                        ))}
-                    </ul>
+                    <Horoscope />
                 </InfoBlock>
 
                 <InfoBlock
