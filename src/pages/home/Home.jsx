@@ -9,6 +9,7 @@ import PageWrapper from '../PageWrapper';
 import styles from './Home.module.css';
 import Word from '../../components/word/Word';
 import BrainTeaser from '../../components/brainteaser/BrainTeaser';
+import Space from '../../components/space/Space';
 
 const Home = () => {
     const zodiacSigns = [
@@ -105,7 +106,7 @@ const Home = () => {
                     title='Кадр из Вселенной'
                     icon='📷'
                 >
-                    <p>Фото</p>
+                    <Space />
                 </InfoBlock>
             </div>
         </PageWrapper>

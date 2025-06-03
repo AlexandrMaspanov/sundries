@@ -1,0 +1,20 @@
+.space {
+    display: flex;
+    justify-content: space-between;
+}
+
+.spaceImg {
+    width: 50%;
+    border-radius: 1rem;
+}
+
+.description {
+    width: 45%;
+}
+
+.error {
+    color: #b00020;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+}
