@@ -11,28 +11,24 @@ const NameDays = () => {
         setLoading(true);
         setError(null);
 
-        try {
-            const today = new Date();
-            const day = today.getDate();
-            const month = today.getMonth();
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, 0);
+        const month = String(today.getMonth() + 1).padStart(2, 0);
+        const key = `${month}-${day}`;
 
-            const url = `https://nameday.abalin.net/api/v2/country=ru&month=${month}&day=${day}`;
-            const res = await fetch(url);
+        const url = `${import.meta.env.BASE_URL}nameDays.json`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                setNames(data[key] || []);
+            })
+            .catch(error => {
+                console.error('Ошибка при загрузке имен: ', error);
+                setError(error.message || 'Неизвестная ошибка');
+                setNames([]);
+            })
 
-            if (!res.ok) {
-                throw new Error('Ошибка при получении именинников. ', error);
-            }
-
-            const data = await res.json();
-            const nameList = data.data.namedays.ru.split(',').map(name => name.trim());
-            setNames(nameList);
-        } catch (error) {
-            console.error('Ошибка при получении именинников ', error);
-            setError(error.message || 'Неизвестная ошибка');
-            setNames([]);
-        } finally {
-            setLoading(false);
-        }
+        setLoading(false);
     }
 
     useEffect(() => {
