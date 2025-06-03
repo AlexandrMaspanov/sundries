@@ -12,7 +12,7 @@ const Quote = () => {
         setError(null);
 
         try {
-            const url = `https://api.quotable.io/random`;
+            const url = `https://thequoteshub.com/api/`;
             const res = await fetch(url);
 
             if (!res.ok) {
@@ -22,7 +22,7 @@ const Quote = () => {
             const data = await res.json();
 
             setQuote({
-                text: data.content,
+                text: data.text,
                 author: data.author
             });
         } catch (error) {
