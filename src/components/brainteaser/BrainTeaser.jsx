@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './BrainTeaser.module.css';
 import Loader from '../UI/loader/Loader';
+import TranslateButton from '../translatebutton/TranslateButton';
 
 const BrainTeaser = () => {
     const [questionData, setQuestionData] = useState(null);
@@ -69,6 +70,7 @@ const BrainTeaser = () => {
                             Правильный ответ: <strong dangerouslySetInnerHTML={{ __html: questionData.correct_answer }} />
                         </div>
                     )}
+                    <TranslateButton text={`${questionData.question}\n${questionData.answers.join('\n')}`} />
                 </div>
             ) : (
                 <p>Нет данных</p>

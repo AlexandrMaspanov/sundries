@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Quote.module.css';
 import Loader from '../UI/loader/Loader';
+import TranslateButton from '../translatebutton/TranslateButton';
 
 const Quote = () => {
     const [quote, setQuote] = useState(null);
@@ -50,6 +51,7 @@ const Quote = () => {
                         "{quote.text}"
                     </blockquote>
                     <p>- {quote.author}</p>
+                    <TranslateButton text={`${quote.text}\n${quote.author}`} />
                 </>
             ) : (
                 <p>Нет цитаты</p>

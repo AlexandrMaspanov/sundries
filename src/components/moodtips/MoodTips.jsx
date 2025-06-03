@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './MoodTips.module.css';
 import Loader from '../UI/loader/Loader';
+import TranslateButton from '../translatebutton/TranslateButton';
 
 const MoodTips = () => {
     const [tip, setTip] = useState(null);
@@ -42,9 +43,12 @@ const MoodTips = () => {
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
             ) : tip ? (
-                <p className={styles.tip}>
-                    {tip}
-                </p>
+                <>
+                    <p className={styles.tip}>
+                        {tip}
+                    </p>
+                    <TranslateButton text={tip} />
+                </>
             ) : (
                 <p>Нет данных</p>
             )}

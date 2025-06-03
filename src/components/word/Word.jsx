@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Word.module.css';
 import Loader from '../UI/loader/Loader';
+import TranslateButton from '../translatebutton/TranslateButton';
 
 const Word = () => {
     const [word, setWord] = useState(null);
@@ -61,6 +62,7 @@ const Word = () => {
                     ) : (
                         <p>Определения не найдены</p>
                     )}
+                    <TranslateButton text={`${word}\n${meanings?.map(meaning => meaning.definition).join('\n')}`} />
                 </>
             ) : (
                 <p>Слово не найдено</p>

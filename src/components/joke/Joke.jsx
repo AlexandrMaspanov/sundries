@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Joke.module.css';
 import Loader from '../UI/loader/Loader';
+import TranslateButton from '../translatebutton/TranslateButton';
 
 const Joke = () => {
     const [joke, setJoke] = useState(null);
@@ -42,9 +43,12 @@ const Joke = () => {
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
             ) : joke ? (
-                <p className={styles.joke}>
-                    {joke}
-                </p>
+                <>
+                    <p className={styles.joke}>
+                        {joke}
+                    </p>
+                    <TranslateButton text={joke} />
+                </>
             ) : (
                 <p>Нет данных</p>
             )}

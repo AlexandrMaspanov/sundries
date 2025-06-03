@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './Space.module.css';
 import Loader from '../UI/loader/Loader';
 import { API_KEYS } from '../../config';
+import TranslateButton from '../translatebutton/TranslateButton';
 
 const Space = () => {
     const SPACE_API_KEY = API_KEYS.space;
@@ -53,6 +54,7 @@ const Space = () => {
                     <div className={styles.description}>
                         <p><strong>{data.title}</strong></p>
                         <p>{data.explanation}</p>
+                        <TranslateButton text={`${data.title}\n${data.explanation}`} />
                     </div>
                 </div>
             ) : (
