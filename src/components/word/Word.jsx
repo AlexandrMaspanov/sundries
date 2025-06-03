@@ -4,6 +4,7 @@ import Loader from '../UI/loader/Loader';
 
 const Word = () => {
     const [word, setWord] = useState(null);
+    const [meanings, setMeanings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -15,20 +16,24 @@ const Word = () => {
             const randomWord = await fetch('https://random-word-api.herokuapp.com/word');
             const rndWord = await randomWord.json();
 
-            const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${rndWord[0]}`;
-            const res = await fetch(url);
+            if (rndWord[0]) {
+                setWord(rndWord[0]);
+                const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${rndWord[0]}`;
+                const res = await fetch(url);
 
-            if (!res.ok) {
-                throw new Error('Ошибка при получении данных. ', error);
+                if (!res.ok) {
+                    throw new Error('Ошибка при получении данных. ', error);
+                }
+
+                const data = await res.json();
+
+                setMeanings(data[0].meanings[0].definitions);
             }
-
-            const data = await res.json();
-
-            setWord(data);
         } catch (error) {
             console.error('Ошибка при получении данных ', error);
             setError(error.message || 'Неизвестная ошибка');
             setWord(null);
+            setMeanings([]);
         } finally {
             setLoading(false);
         }
@@ -44,21 +49,21 @@ const Word = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : word.length ? (
+            ) : word ? (
                 <>
-                    {word.map((item, index) => (
-                        <div key={index} className={styles.word}>
-                            <p><strong>{item.word}</strong></p>
-                            <ul className={styles.list}>
-                                {item.meanings[0].definitions.map((elem, ind) => (
-                                    <li key={ind} className={styles.meaning}>{elem.definition}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+                    <p><strong>{word}</strong></p>
+                    {meanings ? (
+                        <ul className={styles.list}>
+                        {meanings.map((meaning, ind) => (
+                            <li key={ind} className={styles.meaning}>{meaning.definition}</li>
+                        ))}
+                    </ul>
+                    ) : (
+                        <p>Определения не найдены</p>
+                    )}
                 </>
             ) : (
-                <p>Нет данных</p>
+                <p>Слово не найдено</p>
             )}
         </>
     );
