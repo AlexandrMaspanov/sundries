@@ -66,17 +66,26 @@ const Horoscope = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : horoscopes ? (
-                <ul className={styles.horoscopeList}>
-                    {zodiacSigns.map(({ key, name, icon }) => (
-                        <li key={key} className={styles.horoscopeItem}>
-                            <strong>{icon} {name}</strong>
-                            <p>{horoscopes[key]}</p>
-                        </li>
-                    ))}
-                </ul>
             ) : (
-                <p>Нет данных</p>
+                <>
+                    {horoscopes ? (
+                        <div className={styles.horoscope}>
+                            <ul className={styles.horoscopeList}>
+                                {zodiacSigns.map(({ key, name, icon }) => (
+                                    <li key={key} className={styles.horoscopeItem}>
+                                        <strong>{icon} {name}</strong>
+                                        <p>{horoscopes[key]}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ) : (
+                        <p>Нет данных</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://ignio.com/r/export/utf/xml/daily/com.xml' target='_blank' rel='noopener noreferrer'>Ignio</a>
+                    </div>
+                </>
             )}
         </>
     );

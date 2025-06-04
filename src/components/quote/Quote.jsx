@@ -45,16 +45,23 @@ const Quote = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : quote ? (
-                <>
-                    <blockquote className={styles.quote}>
-                        "{quote.text}"
-                    </blockquote>
-                    <p>- {quote.author}</p>
-                    <TranslateButton text={`${quote.text}\n${quote.author}`} />
-                </>
             ) : (
-                <p>Нет цитаты</p>
+                <>
+                    {quote ? (
+                        <>
+                            <blockquote className={styles.quote}>
+                                "{quote.text}"
+                            </blockquote>
+                            <p>- {quote.author}</p>
+                            <TranslateButton text={`${quote.text}\n${quote.author}`} />
+                        </>
+                    ) : (
+                        <p>Нет цитаты</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://thequoteshub.com/' target='_blank' rel='noopener noreferrer'>The Quotes Hub</a>
+                    </div>
+                </>
             )}
         </>
     );

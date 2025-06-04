@@ -42,15 +42,22 @@ const Joke = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : joke ? (
-                <>
-                    <p className={styles.joke}>
-                        {joke}
-                    </p>
-                    <TranslateButton text={joke} />
-                </>
             ) : (
-                <p>Нет данных</p>
+                <>
+                    {joke ? (
+                        <>
+                            <p className={styles.joke}>
+                                {joke}
+                            </p>
+                            <TranslateButton text={joke} />
+                        </>
+                    ) : (
+                        <p>Нет данных</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://v2.jokeapi.dev/' target='_blank' rel='noopener noreferrer'>JokeAPI</a>
+                    </div>
+                </>
             )}
         </>
     );

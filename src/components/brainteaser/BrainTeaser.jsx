@@ -52,28 +52,35 @@ const BrainTeaser = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : questionData ? (
-                <div className={styles.brainTeaser}>
-                    <h3 dangerouslySetInnerHTML={{ __html: questionData.question }} />
-                    <ul>
-                        {questionData.answers.map((answer, idx) => (
-                            <li
-                                key={idx}
-                                className={`${styles.answer} ${showAnswer ? answer === questionData.correct_answer ? styles.correct : answer === selectedAnswer ? styles.incorrect : '' : ''}`}
-                                onClick={() => !showAnswer && handleClick(answer)}
-                                dangerouslySetInnerHTML={{ __html: answer }}
-                            />
-                        ))}
-                    </ul>
-                    {showAnswer && selectedAnswer !== questionData.correct_answer && (
-                        <div className={styles.result}>
-                            Правильный ответ: <strong dangerouslySetInnerHTML={{ __html: questionData.correct_answer }} />
-                        </div>
-                    )}
-                    <TranslateButton text={`${questionData.question}\n${questionData.answers.join('\n')}`} />
-                </div>
             ) : (
-                <p>Нет данных</p>
+                <>
+                    {questionData ? (
+                        <div className={styles.brainTeaser}>
+                            <h3 dangerouslySetInnerHTML={{ __html: questionData.question }} />
+                            <ul>
+                                {questionData.answers.map((answer, idx) => (
+                                    <li
+                                        key={idx}
+                                        className={`${styles.answer} ${showAnswer ? answer === questionData.correct_answer ? styles.correct : answer === selectedAnswer ? styles.incorrect : '' : ''}`}
+                                        onClick={() => !showAnswer && handleClick(answer)}
+                                        dangerouslySetInnerHTML={{ __html: answer }}
+                                    />
+                                ))}
+                            </ul>
+                            {showAnswer && selectedAnswer !== questionData.correct_answer && (
+                                <div className={styles.result}>
+                                    Правильный ответ: <strong dangerouslySetInnerHTML={{ __html: questionData.correct_answer }} />
+                                </div>
+                            )}
+                            <TranslateButton text={`${questionData.question}\n${questionData.answers.join('\n')}`} />
+                        </div>
+                    ) : (
+                        <p>Нет данных</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://opentdb.com/api_config.php' target='_blank' rel='noopener noreferrer'>Trivia API</a>
+                    </div>
+                </>
             )}
         </>
     );

@@ -45,12 +45,19 @@ const Holidays = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : holidays ? (
-                <p className={styles.holidays}>
-                    {holidays.join(', ')}
-                </p>
             ) : (
-                <p>Официальных праздников сегодня нет</p>
+                <>
+                    {holidays ? (
+                    <p className={styles.holidays}>
+                        {holidays.join(', ')}
+                    </p>
+                    ) : (
+                    <p>Официальных праздников сегодня нет</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://date.nager.at/PublicHoliday/Belarus' target='_blank' rel='noopener noreferrer'>Nager.Date</a>
+                    </div>
+                </>
             )}
         </>
     );

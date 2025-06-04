@@ -14,12 +14,15 @@ const Word = () => {
         setError(null);
 
         try {
-            const randomWord = await fetch('https://random-word-api.herokuapp.com/word');
-            const rndWord = await randomWord.json();
+            const url = 'https://random-word-api.vercel.app/api?words=1';
+            const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+            const res = await fetch(proxy);
+            const json = await res.json();
+            const parsedWord = JSON.parse(json.contents)[0];
 
-            if (rndWord[0]) {
-                setWord(rndWord[0]);
-                const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${rndWord[0]}`;
+            if (parsedWord) {
+                setWord(parsedWord);
+                const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${parsedWord}`;
                 const res = await fetch(url);
 
                 if (!res.ok) {
@@ -50,22 +53,29 @@ const Word = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : word ? (
-                <>
-                    <p><strong>{word}</strong></p>
-                    {meanings ? (
-                        <ul className={styles.list}>
-                        {meanings.map((meaning, ind) => (
-                            <li key={ind} className={styles.meaning}>{meaning.definition}</li>
-                        ))}
-                    </ul>
-                    ) : (
-                        <p>Определения не найдены</p>
-                    )}
-                    <TranslateButton text={`${word}\n${meanings?.map(meaning => meaning.definition).join('\n')}`} />
-                </>
             ) : (
-                <p>Слово не найдено</p>
+                <>
+                    {word ? (
+                        <>
+                            <p><strong>{word}</strong></p>
+                            {meanings ? (
+                                <ul className={styles.list}>
+                                    {meanings.map((meaning, ind) => (
+                                        <li key={ind} className={styles.meaning}>{meaning.definition}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p>Определения не найдены</p>
+                            )}
+                            <TranslateButton text={`${word}\n${meanings?.map(meaning => meaning.definition).join('\n')}`} />
+                        </>
+                    ) : (
+                        <p>Слово не найдено</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://dictionaryapi.dev/' target='_blank' rel='noopener noreferrer'>Free Dictionary API</a>
+                    </div>
+                </>
             )}
         </>
     );

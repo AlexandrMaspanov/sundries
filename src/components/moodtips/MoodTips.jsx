@@ -42,15 +42,22 @@ const MoodTips = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : tip ? (
-                <>
-                    <p className={styles.tip}>
-                        {tip}
-                    </p>
-                    <TranslateButton text={tip} />
-                </>
             ) : (
-                <p>Нет данных</p>
+                <>
+                    {tip ? (
+                        <>
+                            <p className={styles.tip}>
+                                {tip}
+                            </p>
+                            <TranslateButton text={tip} />
+                        </>
+                    ) : (
+                        <p>Нет данных</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://api.adviceslip.com/' target='_blank' rel='noopener noreferrer'>Advice Slip JSON API</a>
+                    </div>
+                </>
             )}
         </>
     );

@@ -41,12 +41,19 @@ const NameDays = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : names.length ? (
-                <p className={styles.NameDays}>
-                    {names.join(', ')}
-                </p>
             ) : (
-                <p>Сегодня именинников нет</p>
+                <>
+                    {names.length ? (
+                        <p className={styles.NameDays}>
+                            {names.join(', ')}
+                        </p>
+                    ) : (
+                        <p>Сегодня именинников нет</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://www.pravmir.ru/pravoslavnyj-kalendar-imenin/' target='_blank' rel='noopener noreferrer'>АНО "Правмир"</a>
+                    </div>
+                </>
             )}
         </>
     );

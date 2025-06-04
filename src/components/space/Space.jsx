@@ -44,21 +44,28 @@ const Space = () => {
                 <Loader />
             ) : error ? (
                 <p className={styles.error}>Ошибка: {error}</p>
-            ) : data ? (
-                <div className={styles.space}>
-                    <img
-                        className={styles.spaceImg}
-                        src={data.url}
-                        alt={data.title}
-                    />
-                    <div className={styles.description}>
-                        <p><strong>{data.title}</strong></p>
-                        <p>{data.explanation}</p>
-                        <TranslateButton text={`${data.title}\n${data.explanation}`} />
-                    </div>
-                </div>
             ) : (
-                <p>Нет данных</p>
+                <>
+                    {data ? (
+                        <div className={styles.space}>
+                            <img
+                                className={styles.spaceImg}
+                                src={data.url}
+                                alt={data.title}
+                            />
+                            <div className={styles.description}>
+                                <p><strong>{data.title}</strong></p>
+                                <p>{data.explanation}</p>
+                                <TranslateButton text={`${data.title}\n${data.explanation}`} />
+                            </div>
+                        </div>
+                    ) : (
+                        <p>Нет данных</p>
+                    )}
+                    <div className={styles.source}>
+                        Данные предоставлены сервисом: <a href='https://api.nasa.gov/' target='_blank' rel='noopener noreferrer'>NASA Open APIs</a>
+                    </div>
+                </>
             )}
         </>
     );

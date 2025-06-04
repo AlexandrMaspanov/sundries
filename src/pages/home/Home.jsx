@@ -41,9 +41,7 @@ const Home = () => {
                     title='Цитата'
                     icon='💬'
                 >
-                    <blockquote>
-                        <Quote />
-                    </blockquote>
+                    <Quote />
                 </InfoBlock>
 
                 <InfoBlock

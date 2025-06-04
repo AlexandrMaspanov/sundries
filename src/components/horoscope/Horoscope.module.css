@@ -1,3 +1,7 @@
+.horoscope {
+
+}
+
 .horoscopeList {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -21,10 +25,27 @@
     background-color: #faf5ff;
 }
 
-@media (max-width: 768px) {
-    .horoscopeList {
-        grid-template-columns: 1fr;
-    }
+.source {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #777;
+    text-align: right;
+}
+
+.source a {
+    color: #555;
+    text-decoration: underline;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.source a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.source a:active {
+    color: #00695c;
+    text-decoration: underline;
 }
 
 .error {
@@ -32,4 +53,10 @@
     text-align: center;
     margin-top: 2rem;
     font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .horoscopeList {
+        grid-template-columns: 1fr;
+    }
 }
