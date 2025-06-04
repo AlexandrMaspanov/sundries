@@ -13,21 +13,6 @@ import Horoscope from '../../components/horoscope/Horoscope';
 import Space from '../../components/space/Space';
 
 const Home = () => {
-    const zodiacSigns = [
-        { title: 'Овен', icon: '♈' },
-        { title: 'Телец', icon: '♉' },
-        { title: 'Близнецы', icon: '♊' },
-        { title: 'Рак', icon: '♋' },
-        { title: 'Лев', icon: '♌' },
-        { title: 'Дева', icon: '♍' },
-        { title: 'Весы', icon: '♎' },
-        { title: 'Скорпион', icon: '♏' },
-        { title: 'Стрелец', icon: '♐' },
-        { title: 'Козерог', icon: '♑' },
-        { title: 'Водолей', icon: '♒' },
-        { title: 'Рыбы', icon: '♓' }
-    ];
-
     return (
         <PageWrapper>
             <div className={styles.wrapper}>
