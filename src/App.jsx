@@ -9,16 +9,14 @@ import NotFoundPage from "./pages/notfoundpage/Notfoundpage";
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<RootLayout />}>
-          <Route index element={<Home />} />
-          <Route path="weather" element={<Weather />} />
-          <Route path="exchange-rates" element={<ExchangeRates />} />
-          <Route path='*' element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<Home />} />
+        <Route path="weather" element={<Weather />} />
+        <Route path="exchange-rates" element={<ExchangeRates />} />
+        <Route path='*' element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   )
 }
 
