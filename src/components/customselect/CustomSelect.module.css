@@ -1,0 +1,40 @@
+.custom__control {
+    min-height: 2.25rem;
+    border-radius: 0.5rem;
+    border-color: #ccc;
+    background-color: #ffffff;
+    box-shadow: none;
+    transition: border 0.2s ease;
+}
+
+.custom__control--is-focused {
+    border-color: #007bff;
+    box-shadow: 0 0 0 1px #007bff;
+}
+
+.custom__placeholder {
+    color: #999;
+}
+
+.custom__single-value {
+    color: #333;
+}
+
+.custom__menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.custom__option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+}
+
+.custom__option--is-focused {
+    background-color: #f0f0f0;
+}
+
+.custom__option--is-selected {
+    background-color: #007bff;
+    color: #ffffff;
+}

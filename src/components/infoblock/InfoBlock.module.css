@@ -1,0 +1,12 @@
+.block {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background-color: #fdfdfd;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.block h2 {
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+}

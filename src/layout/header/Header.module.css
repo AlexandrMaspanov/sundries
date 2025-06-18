@@ -1,0 +1,28 @@
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #dbe5ee;
+    background-color: #f9fbfc;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    z-index: 1001;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.overlay {
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+}

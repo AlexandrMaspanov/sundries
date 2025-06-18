@@ -1,0 +1,89 @@
+.card {
+    max-width: 90%;
+    width: 32rem;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f4f4f4;
+    border-radius: 1rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #222;
+    transition: background-color 0.3s ease;
+}
+
+.clear {
+    background-color: #ffeb80;
+}
+.clouds {
+    background-color: #d3d3d3;
+}
+.rain {
+    background-color: #90caf9;
+}
+.snow {
+    background-color: #e0f7fa;
+}
+.fog {
+    background-color: #e0e0e0;
+}
+.default {
+    background-color: #f4f4f4;
+}
+
+.city {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.icon {
+    width: 5rem;
+    height: 5rem;
+}
+
+.temp {
+    margin: 0.5rem 0;
+    font-size: 2rem;
+}
+
+.description {
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+    color: #555;
+}
+
+.details {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #333;
+}
+
+.source {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #777;
+    text-align: right;
+}
+
+.source a {
+    color: #555;
+    text-decoration: underline;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.source a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.source a:active {
+    color: #00695c;
+    text-decoration: underline;
+}
+
+.error {
+    color: #b00020;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+}
