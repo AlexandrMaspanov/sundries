@@ -1,20 +1,22 @@
 import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
 import Header from './header/Header';
 import Footer from './footer/Footer';
+import Loader from '../components/UI/loader/Loader';
 import styles from './RootLayout.module.css';
 
-const RootLayout = () => {
-    return (
-        <div className={styles.layout}>
-            <Header />
+const RootLayout = () => (
+    <div className={styles.layout}>
+        <Header />
 
-            <main>
+        <main>
+            <Suspense fallback={<Loader />}>
                 <Outlet />
-            </main>
+            </Suspense>
+        </main>
 
-            <Footer />
-        </div>
-    );
-}
+        <Footer />
+    </div>
+);
 
 export default RootLayout;

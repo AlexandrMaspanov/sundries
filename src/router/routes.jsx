@@ -1,8 +1,10 @@
+import { lazy } from 'react';
 import RootLayout from '../layout/RootLayout';
-import Home from '../pages/home/Home';
-import Weather from '../pages/weather/Weather';
-import ExchangeRates from '../pages/exchange-rates/ExchangeRates';
-import NotFoundPage from '../pages/notfoundpage/Notfoundpage';
+
+const Home = lazy(() => import('../pages/home/Home'));
+const Weather = lazy(() => import('../pages/weather/Weather'));
+const ExchangeRates = lazy(() => import('../pages/exchange-rates/ExchangeRates'));
+const NotFoundPage = lazy(() => import('../pages/notfoundpage/Notfoundpage'));
 
 const routes = [
     {
