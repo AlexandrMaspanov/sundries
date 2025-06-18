@@ -1,0 +1,1 @@
+import{j as n,d as t}from"./index-BOlLIp-v.js";import{P as s}from"./PageWrapper-D6-RPKnQ.js";const e="_notFoundPage_atgb4_1",a="_link_atgb4_13",o={notFoundPage:e,link:a},d=()=>n.jsx(s,{children:n.jsxs("div",{className:o.notFoundPage,children:["This page doesn't exist. Go to the ",n.jsx(t,{to:"/",className:o.link,children:"Main"}),"."]})});export{d as default};
